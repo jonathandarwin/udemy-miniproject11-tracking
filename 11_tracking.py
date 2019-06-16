@@ -5,7 +5,7 @@ import numpy as np
 # Initalize camera
 cap = cv2.VideoCapture(0)
 
-# define range of purple color in HSV
+# deklarasi batas warna yang ingin di track
 lower_purple = np.array([130,50,90])
 upper_purple = np.array([170,255,255])
 
@@ -24,11 +24,9 @@ while True:
     hsv_img = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     # Threshold the HSV image to get only blue colors
-    mask = cv2.inRange(hsv_img, lower_purple, upper_purple)
-    #mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    
-    # Find contours, OpenCV 3.X users use this line instead
-    #  _, contours, _ = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    mask = cv2.inRange(hsv_img, lower_purple, upper_purple)    
+            
+    # detect edge objek yang telah didapat diatas
     _, contours, _ = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     
     # Create empty centre array to store centroid center of mass
